@@ -6,9 +6,7 @@ using System.Threading.Tasks;
 
 namespace AuthServer.Core.Dtos
 {
-    public class LoginDto
+    internal class UserAppDto
     {
-        public string Email { get; set; }
-        public string Password { get; set; }
     }
 }
