@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AuthServer.Core.Configuration;
 using AuthServer.Core.Dtos;
 using AuthServer.Core.Models;
 
