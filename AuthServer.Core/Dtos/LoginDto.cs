@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SharedLibrary.Dtos
+namespace AuthServer.Core.Dtos
 {
-    public class NoDataDto
+    internal class LoginDto
     {
     }
 }
