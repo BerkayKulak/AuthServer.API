@@ -22,6 +22,8 @@ namespace AuthServer.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            // datanın bu projenin bulduğu interfaceleri alıp, direk olarak eklicek
+            builder.ApplyConfigurationsFromAssembly(GetType().Assembly);
             base.OnModelCreating(builder);
         }
     }
