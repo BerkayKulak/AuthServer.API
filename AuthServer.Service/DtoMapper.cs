@@ -3,10 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AuthServer.Core.Dtos;
+using AuthServer.Core.Models;
+using AutoMapper;
 
 namespace AuthServer.Service
 {
-    internal class DtoMapper
+    public class DtoMapper:Profile
     {
+        public DtoMapper()
+        {
+            CreateMap<ProductDto, Product>().ReverseMap();
+            CreateMap<UserAppDto, UserApp>().ReverseMap();
+        }
     }
 }
