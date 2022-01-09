@@ -40,6 +40,8 @@ namespace AuthServer.Service.Services
             return Convert.ToBase64String(numberByte);
         }
 
+
+        // üyelik sistemi gerektiren token oluşturmak istediğimde
         private IEnumerable<Claim> GetClaim(UserApp userApp, List<String> audiences)
         {
             var userList = new List<Claim>()
@@ -56,6 +58,20 @@ namespace AuthServer.Service.Services
 
             return userList;
 
+        }
+
+        // üyelik sistemi gerektirmeyen token oluşturmak istediğimde
+        private IEnumerable<Claim> GetClaimsByClient(Client client)
+        {
+            var claims = new List<Claim>();
+
+            claims.AddRange(client.Audiences.Select(x => new Claim(JwtRegisteredClaimNames.Aud, x)));
+
+            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString());
+
+            new Claim(JwtRegisteredClaimNames.Sub, client.Id).ToString();
+
+            return claims;
         }
 
         public TokenDto CreateToken(UserApp userApp)
