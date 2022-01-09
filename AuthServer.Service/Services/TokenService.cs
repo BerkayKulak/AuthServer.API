@@ -92,7 +92,8 @@ namespace AuthServer.Service.Services
                 issuer: _tokenOptions.Issuer,
                 expires: accessTokenExpiration,
                 notBefore: DateTime.Now,
-                claims: GetClaim(userApp, _tokenOptions.Audience), signingCredentials: signingCredentials);
+                claims: GetClaim(userApp, _tokenOptions.Audience), 
+                signingCredentials: signingCredentials);
 
             var handler = new JwtSecurityTokenHandler();
 
@@ -112,7 +113,33 @@ namespace AuthServer.Service.Services
 
         public ClientTokenDto CreateTokenByClient(Client client)
         {
-            throw new NotImplementedException();
+            // var olan saate dakika olarak eklicek
+            // token ömrünü belirledik
+            var accessTokenExpiration = DateTime.Now.AddMinutes(_tokenOptions.AccessTokenExpiration);
+
+            var securityKey = SignService.GetSymmetricSecurityKey(_tokenOptions.SecurityKey);
+
+            // şifreleme algoritmamız
+            SigningCredentials signingCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature);
+
+            JwtSecurityToken jwtSecurityToken = new JwtSecurityToken(
+                issuer: _tokenOptions.Issuer,
+                expires: accessTokenExpiration,
+                notBefore: DateTime.Now,
+                claims: GetClaimsByClient(client),
+                signingCredentials: signingCredentials);
+
+            var handler = new JwtSecurityTokenHandler();
+
+            var token = handler.WriteToken(jwtSecurityToken);
+
+            var tokenDto = new ClientTokenDto()
+            {
+                AccessToken = token,
+                AccessTokenExpiration = accessTokenExpiration,
+            };
+
+            return tokenDto;
         }
     }
 }
