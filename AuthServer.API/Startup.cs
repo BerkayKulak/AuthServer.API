@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AuthServer.Core.Configuration;
 using SharedLibrary.Configurations;
 
 namespace AuthServer.API
@@ -28,6 +29,7 @@ namespace AuthServer.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<CustomTokenOptions>(Configuration.GetSection("TokenOptions"));
+            services.Configure<Client>(Configuration.GetSection("Clients"));
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
