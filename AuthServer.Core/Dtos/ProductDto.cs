@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace AuthServer.Core.Dtos
 {
-    internal class ProductDto
+    public class ProductDto
     {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public decimal Price { get; set; }
+        public string UserId { get; set; }
     }
 }
