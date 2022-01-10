@@ -11,7 +11,7 @@ using SharedLibrary.Dtos;
 
 namespace AuthServer.Service.Services
 {
-    internal class UserService:IUserService
+    public class UserService:IUserService
     {
         private readonly UserManager<UserApp> _userManager;
 
