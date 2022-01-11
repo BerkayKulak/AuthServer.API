@@ -52,7 +52,7 @@ namespace AuthServer.Service.Services
                 // kullanıcının kimliği oludğundan dolayı ID ye karşılık geliyor.
                 new Claim(ClaimTypes.NameIdentifier,userApp.Id),
                 new Claim(JwtRegisteredClaimNames.Email,userApp.Email),
-                new Claim(ClaimTypes.Role,userApp.UserName),
+                new Claim(ClaimTypes.Name,userApp.UserName),
                 new Claim(JwtRegisteredClaimNames.Jti,Guid.NewGuid().ToString())
             };
 
