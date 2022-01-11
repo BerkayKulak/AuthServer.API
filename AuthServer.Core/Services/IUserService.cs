@@ -13,7 +13,7 @@ namespace AuthServer.Core.Services
     {
         // veritabanında oluşan kullanıcıyı dönücem. ID dahil olmak üzere
         Task<Response<UserAppDto>> CreateUserAsync(CreateUserDto createUserDto);
-        Task<Response<UserAppDto>> GetUserByNameAsync(string userName);
+        Task<Response<UserAppDto>> GetUserByNameAsync(string UserName);
 
     }
 }
