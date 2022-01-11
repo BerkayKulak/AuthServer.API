@@ -11,15 +11,16 @@ namespace MiniApp1.API.Controllers
     [ApiController]
     public class StokController : ControllerBase
     {
+        [HttpGet]
         public IActionResult GetStock()
         {
             var userName = HttpContext.User.Identity.Name;
 
-            var userId = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
+            var userIdClaim = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
 
             // veritabanında userId veya userName alanları üzerinden gerekli dataları çek
 
-            return Ok($"Stock UserName:{userName} - UserId:{userId}");
+            return Ok($"Stock UserName:{userName} - UserId:{userIdClaim.Value}");
         }
     }
 }
