@@ -25,6 +25,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using SharedLibrary.Configurations;
+using SharedLibrary.Services;
 
 namespace AuthServer.API
 {
@@ -68,7 +69,7 @@ namespace AuthServer.API
 
             services.Configure<CustomTokenOptions>(Configuration.GetSection("TokenOptions"));
 
-            var tokenOptions = Configuration.GetSection("TokenOptions").Get<CustomTokenOptions>();
+           
 
             services.Configure<List<Client>>(Configuration.GetSection("Clients"));
 
@@ -78,6 +79,7 @@ namespace AuthServer.API
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             }).AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, opts =>
             {
+                var tokenOptions = Configuration.GetSection("TokenOptions").Get<CustomTokenOptions>();
                 opts.TokenValidationParameters = new TokenValidationParameters()
                 {
                     ValidIssuer = tokenOptions.Issuer,
