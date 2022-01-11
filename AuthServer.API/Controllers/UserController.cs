@@ -17,11 +17,12 @@ namespace AuthServer.API.Controllers
     public class UserController : CustomBaseController
     {
         private readonly IUserService _userService;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public UserController(IUserService userService)
+        public UserController(IUserService userService, IHttpContextAccessor httpContextAccessor)
         {
-
             _userService = userService;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         [HttpPost]
@@ -35,7 +36,7 @@ namespace AuthServer.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetUser()
         {
-            return ActionResultInstance(await _userService.GetUserByNameAsync(HttpContext.User.Identity.Name));
+            return ActionResultInstance(await _userService.GetUserByNameAsync(_httpContextAccessor.HttpContext.User.Identity.Name));
         }
     }
 }
