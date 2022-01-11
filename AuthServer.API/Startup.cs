@@ -26,6 +26,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using SharedLibrary.Configurations;
+using SharedLibrary.Extensions;
 using SharedLibrary.Services;
 
 namespace AuthServer.API
@@ -94,7 +95,6 @@ namespace AuthServer.API
                     ValidateAudience = true,
                     ValidateIssuer = true,
                     ValidateLifetime = true,
-
                     ClockSkew = TimeSpan.Zero
 
                     
@@ -102,10 +102,15 @@ namespace AuthServer.API
 
             });
 
+
             services.AddControllers().AddFluentValidation(options =>
             {
                 options.RegisterValidatorsFromAssemblyContaining<Startup>();
             });
+
+
+            services.UseCustomValidationResponse();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "UdemyAuthServer.API", Version = "v1" });
