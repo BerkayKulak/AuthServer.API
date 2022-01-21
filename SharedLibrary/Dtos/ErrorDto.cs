@@ -11,11 +11,10 @@ namespace SharedLibrary.Dtos
         public List<String> Errors { get; private set; } = new List<string>();
         public bool IsShow { get;private set; }// sen bu hatayı kullanıcıya göster.
 
-
         public ErrorDto(string error,bool isShow)
         {
             Errors.Add(error);
-            isShow = true;
+            IsShow = isShow;
         }
 
         public ErrorDto(List<string> errors, bool isShow)

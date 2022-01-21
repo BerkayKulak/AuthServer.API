@@ -128,8 +128,10 @@ namespace AuthServer.API
             }
             else
             {
+               
             }
-           
+
+            app.UseCustomException();
             app.UseHttpsRedirection();
 
             app.UseRouting();
